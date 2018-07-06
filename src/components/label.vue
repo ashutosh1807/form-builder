@@ -8,7 +8,7 @@
       </button>
       <br>
       <span class="innerlab">
-      <span :style="Style">{{textfield}}</span>
+      <span :style="Style" class="label label-default">{{textfield}}</span>
       </span>
       <!-- Modal -->
       <div class="modal left fade in show" v-if="showModal" role="dialog">

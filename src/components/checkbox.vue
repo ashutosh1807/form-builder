@@ -9,7 +9,7 @@
       <span class="innerchk" >
          <span :style="Style">
             <template v-for="(item,i) in items">
-               <input type="checkbox" :value="item.value" :name="name" >{{item.label}}  <br v-if="inline.length < 1">
+               <input type="checkbox" class="form-check-input" :value="item.value" :name="name" >{{item.label}}  <br v-if="inline.length < 1">
             </template>
          </span>
       </span>

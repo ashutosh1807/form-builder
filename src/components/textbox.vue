@@ -8,7 +8,7 @@
         </button>
         <br>
         <span class="innertex">
-             <input type="text"  :name="name" :style="Style">
+             <input type="text" class="form-control"  :name="name" :style="Style">
         </span>
 
         <!-- Modal -->

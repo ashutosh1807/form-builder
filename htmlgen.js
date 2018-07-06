@@ -82,6 +82,10 @@ function genhtml(){
     a="<!DOCTYPE html>\n<html>\n"+'   '+"<head></head>\n"+'  '+"<body>\n<div style='height:"+h+";width:975px;border-style: solid;'></div>\n"+process(a)+"</body>\n</html>";
     document.getElementById("myInput").value=a;
   } 
+  function a(){
+    var file = new File(["Hello, world!"], "hello world.txt", {type: "text/plain;charset=utf-8"});
+    FileSaver.saveAs(file);
+  }
 
   function copyclip() {
     var copyText = document.getElementById("myInput");
