@@ -6,8 +6,8 @@
          </div>
       </div>
       <div class="row">
-         <div class="col-sm-10">
-            <div class="jumbotron bg-light drop-zone" style="height: 600px;" :style="Style" id="workarea">
+         <div class="col-sm-10" style="height:650px ;overflow:auto">
+            <div class="jumbotron bg-light drop-zone"  :style="Style" id="workarea">
                 <keep-alive v-for="comp in complist">
                   <component  :is="comp.label" ></component>
                </keep-alive>
@@ -24,7 +24,7 @@
                <tbody>
                   <tr>
                      <td>
-                        <button type="button" @click="addlab" class="btn btn-success" style="width:100%;"  >
+                        <button type="button" @click="addlab" class="btn btn-success labelbutton" style="width:100%;"  >
                         <span class="glyphicon glyphicon-tag"></span>
                         Label
                         </button>
@@ -149,9 +149,9 @@
    import mulsel from './components/multiselect.vue'
    import texarea from './components/textarea.vue'
    import but from './components/button.vue'
-   
-   
+    
        export default{
+        
          data:function(){
            return{
              complist:[],
@@ -220,10 +220,25 @@
            addbutton:function(){
              this.complist.push({label:'but'});
            }
-         }
-       }
+         },
+         mounted: function () {
+                this.$nextTick(function () {
+                    $(".labelbutton").draggable({
+                      cancel: false,
+                      helper: "clone",
+                      containment: "#workarea"});
+                    $("#workarea").droppable({
+                      drop: function(event, ui) {
+                       
+                      }
+                    });
+                            });
+
+         
+       }}
    
    
 </script>
 <style>
+</style>
 </style>
