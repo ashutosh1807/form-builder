@@ -3,6 +3,7 @@
 * Add "left" or "right" in modal parent div, after class="modal".
 * Get free snippets on bootpen.com
 *******************************/
+
 	.modal.left .modal-dialog,
 	.modal.right .modal-dialog {
 		position: fixed;
@@ -14,6 +15,7 @@
 		     -o-transform: translate3d(0%, 0, 0);
 		        transform: translate3d(0%, 0, 0);
 	}
+	
 
 	.modal.left .modal-content,
 	.modal.right .modal-content {
@@ -114,4 +116,9 @@ body {
 .ui-helper {
 	width:fit-content !important;
 	height:fit-content !important;
+}
+
+
+.container{
+	background:#fff !important;
 }

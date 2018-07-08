@@ -1,53 +1,44 @@
 <template>
    <div class="multisel draggable" v-if="vis" style="position:absolute;">
-      <button type="button" @click="showModal = true" style="font-size: 10px; padding: 0; border: none; background: none;" >
-      <span class="glyphicon glyphicon-pencil"></span>
+      <button type="button" @click="sho" style="font-size: 10px; padding: 0; border: none; background: none;" >
+      <i class="fa fa-pencil"></i>
       </button>
       <button type="button" style="font-size: 16px; padding: 0; border: none; background: none;" @click="vis=!vis">
       <span>&times;</span>
       </button>
       <br>
       <span class="innermultisel">
-         <select :style="Style" :name="name" multiple>
+         <select class="custom-select" :style="Style" :name="name" multiple>
             <template v-for="(item,i) in items">
                <option  :value="item.value" >{{item.label}}</option>
                <br>
             </template>
          </select>
       </span>
-      <!-- Modal -->
-      <div class="modal left fade in show" v-if="showModal" role="dialog">
-         <div class="modal-dialog">
-            <!-- Modal content-->
+       <b-modal title="Edit Multi-Select option"  header-bg-variant="success"  header-text-variant="light"  ref="inp" >
+
             <div class="modal-content">
-               <div class="modal-header text-center" style="background-color:#5CB85C;color: #fff;">
-                  
-                  <button type="button" class="close" @click="showModal = false" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                  </button>
-                  <h2>Edit Multi-Select option</h2>
-               </div>
                <div class="modal-body">
-                  <div class="form-group">
+                  <div class="form-group row">
                      <label class="col-sm-4 ">Name:</label>
                      <div class="col-sm-8">
                         <input type="text" class="form-control" v-model="name">
                      </div>
                   </div>
                   <br><br>
-                  <div class="form-group">
+                  <div class="form-group row">
                      <label class="col-sm-4 ">Label size:</label>
                      <div class="col-sm-8">
                         <div class="input-group">
                            <span class="input-group-btn">
                            <button class="btn btn-default" type="button" @click="textsize--">
-                           <span class="glyphicon glyphicon-minus"></span>
+                           <i class="fa fa-minus"></i>
                            </button>
                            </span>
-                           <input type="text" class="form-control" v-model="textsize">
+                           <input type="text" class="form-control text-center" v-model="textsize">
                            <span class="input-group-btn">
                            <button class="btn btn-default" type="button" @click="textsize++">
-                           <span class="glyphicon glyphicon-plus"></span>
+                           <i class="fa fa-plus"></i>
                            </button>
                            </span>
                         </div>
@@ -84,19 +75,13 @@
                   
                </div>
             </div>
-         </div>
-      </div>
+         </b-modal>
    </div>
 </template>
 <script>
-   import { Draggable } from 'draggable-vue-directive'
        export default {
-            directives: {
-                  Draggable,
-              },
            data: function() {
                return {
-                    showModal: false,
                    name: '',
                    items: [{
                        label: 'Option 1',
@@ -114,6 +99,19 @@
                }
    
            },
+           watch: {
+                textsize: function (val) {
+                    if(val<12){ 
+                        alert('Cannot be less than 12px');
+                    this.textsize=12;}
+                }
+           },
+            methods:{
+            sho(){
+                this.$refs.inp.show();
+                }
+            
+        },
            computed: {
                 Style: function() {
                     return {

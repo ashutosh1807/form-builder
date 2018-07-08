@@ -1,32 +1,21 @@
 <template>
     <div class="texarea draggable" v-if="vis" style="position:absolute;">
-        <button type="button" @click="showModal = true" style="font-size: 10px; padding: 0; border: none; background: none;" data-toggle="modal" data-target=".textModal">
-            <span class="glyphicon glyphicon-pencil"></span>
+        <button type="button" @click="sho" style="font-size: 10px; padding: 0; border: none; background: none;" data-toggle="modal" data-target=".textModal">
+            <i class="fa fa-pencil"></i>
         </button>
         <button type="button" style="font-size: 16px; padding: 0; border: none; background: none;" @click="vis=!vis">
             <span>&times;</span>
         </button>
         <br>
         <span class="innertexarea">
-             <textarea type="text"  :name="name" :style="Style"></textarea>
+             <textarea type="text"   class="form-control" :name="name" :style="Style"></textarea>
         </span>
 
-        <!-- Modal -->
-        <div class="modal left fade in show" v-if="showModal" role="dialog">
-            <div class="modal-dialog">
+              <b-modal title="Edit text-area"  header-bg-variant="success"  header-text-variant="light"  ref="inp" >
 
-                <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header text-center" style="background-color:#5CB85C;color: #fff;">
-                       
-                        <button type="button" class="close" @click="showModal = false" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                         <h2>Edit text-area</h2>
-
-                    </div>
                     <div class="modal-body" >
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="col-sm-4 ">Name:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" v-model="name">
@@ -34,7 +23,7 @@
                         </div>
                         <br>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="col-sm-4 ">height:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" v-model="length">
@@ -42,7 +31,7 @@
                         </div>
                         <br>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="col-sm-4 ">Width:</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" v-model="width">
@@ -52,8 +41,7 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
+            </b-modal>
     </div>
 </template>
 <script>
@@ -61,7 +49,7 @@
     export default {
         data: function() {
             return {
-                showModal: false,
+
                 name: 'textarea',
                 vis: true,
                 width: 200,
@@ -75,6 +63,12 @@
                         height: this.length + "px"
                     }
                 }
+            },
+            methods:{
+                sho(){
+                    this.$refs.inp.show();
+                    }
+            
             },
              mounted: function () {
                 this.$nextTick(function () {

@@ -1,7 +1,7 @@
 <template>
    <div class="lab draggable" v-if="vis" style="position:absolute">
-      <button type="button" @click="showModal = true" style="font-size: 10px; padding: 0; border: none; background: none;">
-      <span class="glyphicon glyphicon-pencil"></span>
+      <button type="button"  @click="sho"   style="font-size: 10px; padding: 0; border: none; background: none;">
+      <i class="fa fa-pencil"></i>
       </button>
       <button type="button" style="font-size: 16px; padding: 0; border: none; background: none;" @click="vis=!vis">
       <span>&times;</span>
@@ -10,19 +10,10 @@
       <span class="innerlab">
       <span :style="Style" class="label label-default">{{textfield}}</span>
       </span>
-      <!-- Modal -->
-      <div class="modal left fade in show" v-if="showModal" role="dialog">
-         <div class="modal-dialog">
-            <!-- Modal content-->
+      <b-modal title="Edit Label"  header-bg-variant="success"  header-text-variant="light"  ref="inp" >
             <div class="modal-content">
-               <div class="modal-header text-center" style="background-color:#5CB85C;color: #fff;">
-                  <button type="button" @click="showModal = false" class="close" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                  </button>
-                  <h2>Edit Label</h2>
-               </div>
                <div class="modal-body">
-                  <div class="form-group">
+                  <div class="form-group row">
                      <label class="col-sm-4 " for="input">Text:</label>
                      <div class="col-sm-8">
                         <input type="text" class="form-control" v-model="textfield">
@@ -30,19 +21,20 @@
                   </div>
                   <br>
                   <br>
-                  <div class="form-group">
+                  <div class="form-group row">
                     <label class="col-sm-4 ">Text-size:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" @click="textsize--">
-                                    <span class="glyphicon glyphicon-minus"></span>
+                                          <i class="fa fa-minus"></i>
                                 </button>
                             </span>
-                            <input type="text" class="form-control" v-model="textsize">
+                            <input type="text" class="form-control text-center" v-model="textsize">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" @click="textsize++">
-                                    <span class="glyphicon glyphicon-plus"></span>
+                                          <i class="fa fa-plus"></i>
+
                                 </button>
                             </span>
                         </div>
@@ -50,7 +42,7 @@
                   </div>
                   <br>
                   <br>
-                  <div class="form-group">
+                  <div class="form-group row">
                      <label class="col-sm-4 ">Color:</label>
                      <div class="col-sm-8">
                         <input type="color" class="form-control" v-model="color">
@@ -60,56 +52,29 @@
                   <br>
                   <div align="center">
                      <button type="button" class="butn" @click="textbold" :class="{ pressed: b }">
-                     <span class="glyphicon glyphicon-bold"></span>
+                        <i class="fa fa-bold"></i>
                      </button>
                      <button type="button" class="butn" @click="textitalic" :class="{ pressed: i }">
-                     <span class="glyphicon glyphicon-italic"></span>
+                        <i class="fa fa-italic"></i>
                      </button>
-                     <button type="buuton" class="butn" @click="textunderline" :class="{ pressed: u }">
-                     <span class="glyphicon glyphicon-text-color"></span>
+                     <button type="button" class="butn" @click="textunderline" :class="{ pressed: u }">
+                        <i class="fa fa-underline"></i>
                      </button>
                   </div>
-                  <!---
-                     <div class="form-group">
-                         <label class="col-sm-4">Font</label>
-                         <div class="col-sm-8">
-                             <select>
-                                 <template v-for="font in fontstyles">
-                                     <option><span :style="fontFamily:a;">{{font}}</span></option>
-                                     <br>
-                                 </template>
-                             </select>
-                         </div>
-                     </div>-->
+            
                </div>
-            </div>
-         </div>
-      </div>
+               </div>
+      </b-modal>
    </div>
 </template>
 <script>
-   import {
-       Draggable
-   }
-   from 'draggable-vue-directive'
    export default {
-       directives: {
-           Draggable,
-       },
        data: function() {
            return {
-               showModal: false,
                textfield: 'innerhtml',
-               a: 'Antiqua',
                textsize: 12,
                color: '#000000',
                vis: true,
-               fontstyles: ['Agency FB', 'Antiqua', 'Architect', 'Arial', 'BankFuturistic', 'BankGothic',
-                   'Blackletter', 'Blagovest', 'Calibri', 'Comic Sans MS', 'Courier', 'Cursive', 'Decorative',
-                   'Fantasy', 'Fraktur', 'Frosty', 'Garamond', 'Georgia', 'Helvetica', 'Impact', 'Minion',
-                   'Modern', 'Monospace', 'Open Sans', 'Palatino', 'Roman', 'Sans-serif', 'Serif', 'Script', 'Swiss', 'Times',
-                   'Times New Roman', 'Tw Cen MT', 'Verdana'
-               ],
                b: false,
                bo: 'normal',
                i: false,
@@ -132,7 +97,17 @@
                }
            }
        },
+       watch: {
+                textsize: function (val) {
+                    if(val<12){ 
+                        alert('Cannot be less than 12px');
+                    this.textsize=12;}
+                }
+           },
        methods: {
+           sho(){
+                this.$refs.inp.show();
+            },
            textbold() {
                    if (!this.b) {
                        this.b = true;
